@@ -12,21 +12,42 @@ for file in files:
     data = pd.read_csv(f'./dirty_data/{file}', header=None)
 
     # Extract the first row and the 13th row to use as part of the column headers
-    column_headers = data.iloc[0, :2].tolist() + data.iloc[12, :10].tolist()
+    column_headers = data.iloc[0, :2].tolist()
+
+    # find the row that contains "Batting" as the first column so we can skip it
+    index = data[data[0] == 'Batting'].index[0]
+    print(f'Skipping the first {index} rows')
+    numTeams = index - 1
+    print(f'Number of teams: {numTeams}')
 
     # Move the first 10 rows to the first two columns
-    first_part = data.iloc[1:11, :2]
+    teams = data.iloc[1:index, :2]
 
-    # Move the next 10 rows to the next 10 columns
-    second_part = data.iloc[13:23, :10]
+    column_headers.extend(data.iloc[index + 1, :10].tolist())
+
+    # # Move the next 10 rows to the next 10 columns
+    roti_stats = data.iloc[index + 2:index + numTeams + 2, :10]
 
     # Concatenate the two parts horizontally
-    full_table = pd.concat([first_part.reset_index(drop=True), second_part.reset_index(drop=True)], axis=1)
+    roti_table = pd.concat([teams.reset_index(drop=True), roti_stats.reset_index(drop=True)], axis=1)
 
     # Set the column names
-    full_table.columns = column_headers
+    roti_table.columns = column_headers
 
-    print(full_table.to_string(index=False))
+    # print(roti_table.to_string(index=False))
 
     # save to csv
-    full_table.to_csv(f'./clean_data/roti/{file.split(' ')[-1]}', index=False)
+    roti_table.to_csv(f'./clean_data/roti/{file.split(' ')[-1]}', index=False)
+
+    numerical_stats_index = numTeams * 4 + 10
+
+    numerical_stats = data.iloc[numerical_stats_index:numerical_stats_index + numTeams, :10]
+
+    numerical_table = pd.concat([teams.reset_index(drop=True), numerical_stats.reset_index(drop=True)], axis=1)
+
+    numerical_table.columns = column_headers
+
+    print(numerical_table.to_string(index=False))
+
+    numerical_table.to_csv(f'./clean_data/stats/{file.split(' ')[-1]}', index=False)
+
