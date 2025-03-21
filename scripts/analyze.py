@@ -58,9 +58,9 @@ for col in sm_df.columns:
     # get avg and round to the nearest thousandth
     winner_avg[col] = round((sm_df[col].mean() + fp_df[col].mean()) / 2, 3)
 
+# print the average winning stats
 for key, value in winner_avg.items():
     print(f'{key}: {value}')
-
 
 # plot the data for each category
 for col in sm_df.columns:
@@ -74,4 +74,5 @@ for col in sm_df.columns:
     plt.ylabel(col)
     plt.title('Winning ' + col)
     plt.legend()
+    plt.tight_layout()
     plt.show()
