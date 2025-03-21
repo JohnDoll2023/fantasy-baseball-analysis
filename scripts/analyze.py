@@ -29,12 +29,16 @@ for frame in data_frame:
     year = frame[0:4]
     if year == '2020':
         continue
-    max_values = data_frame[frame].max()
-    max_values['Year'] = year
+    min_values = data_frame[frame].min()
+    winning_values = data_frame[frame].max()
+    winning_values['Year'] = year
+    # we want the max values for call categories except for 'WHIP' and 'ERA'
+    winning_values['WHIP'] = min_values['WHIP']
+    winning_values['ERA'] = min_values['ERA']
     if 'SM' in frame:
-        sm_data.append(max_values)
+        sm_data.append(winning_values)
     else:
-        fp_data.append(max_values)
+        fp_data.append(winning_values)
 
 # Convert lists to DataFrames, but make sure to include the 'Year' column first
 sm_df = pd.DataFrame(sm_data)
@@ -53,25 +57,26 @@ print(fp_df.to_string(index=False))
 # sm_df.to_csv('./results/sm_max_values.csv', index=False)
 # fp_df.to_csv('./results/fp_max_values.csv', index=False)
 
+# get average winning stat combined for both SM and FP and store in a dictionary
+winner_avg = {}
+for col in sm_df.columns:
+    if col == 'Year':
+        continue
+    winner_avg[col] = (sm_df[col].mean() + fp_df[col].mean()) / 2
 
-# plot the data
-plt.plot(sm_df['Year'], sm_df['R'], label='SM')
-plt.plot(fp_df['Year'], fp_df['R'], label='FP')
-plt.xticks(rotation=45)
-plt.xlabel('Year')
-plt.ylabel('Number of Runs')
-plt.title('Winning Number of Runs')
-plt.legend()
-plt.show()
+print(winner_avg)
 
 
 # plot the data
-# plt.plot(sm.keys(), sm.values(), label='SM')
-# plt.plot(fp.keys(), fp.values(), label='FP')
-# # plt.axhline(y=avg_runs, color='r', linestyle='-', label='Average Runs')
-# plt.xticks(rotation=45)
-# plt.xlabel('Year')
-# plt.ylabel('Number of Runs')
-# plt.title('Winning Number of Runs')
-# plt.legend()
-# plt.show()
+for col in sm_df.columns:
+    if col == 'Year':
+        continue
+    plt.plot(sm_df['Year'], sm_df[col], label='SM ' + col)
+    plt.plot(fp_df['Year'], fp_df[col], label='FP ' + col)
+    plt.axhline(y=winner_avg[col], color='r', linestyle='-', label='Average ' + col)
+    plt.xticks(rotation=45)
+    plt.xlabel('Year')
+    plt.ylabel('Value')
+    plt.title('Winning ' + col)
+    plt.legend()
+    plt.show()

@@ -52,6 +52,10 @@ for file in files:
 
     print(numerical_table.to_string(index=False))
 
+    if '2015' in file:
+        #remove the last 2 rows for data inconsistences
+        numerical_table = numerical_table[:-2]
+
     
 
     numerical_table.to_csv(f'./clean_data/stats/{file.split(' ')[-1]}', index=False)
