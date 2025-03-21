@@ -25,6 +25,9 @@ for file in files:
 
     column_headers.extend(data.iloc[index + 1, :10].tolist())
 
+    # if any columns equal 'SVHLD', replace with 'SV'
+    column_headers = ['SVHD' if x == 'SV' else x for x in column_headers]
+
     # # Move the next 10 rows to the next 10 columns
     roti_stats = data.iloc[index + 2:index + numTeams + 2, :10]
 
@@ -48,6 +51,8 @@ for file in files:
     numerical_table.columns = column_headers
 
     print(numerical_table.to_string(index=False))
+
+    
 
     numerical_table.to_csv(f'./clean_data/stats/{file.split(' ')[-1]}', index=False)
 
