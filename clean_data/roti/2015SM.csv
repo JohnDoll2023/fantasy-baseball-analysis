@@ -1,13 +1,13 @@
-RK,Team,R,HR,RBI,SB,AVG,K,W,SVHD,ERA,WHIP
-1,Al - Stars,11,9,12,10,8,10,8.5,11,10,12
-2,Teeter Twatters,12,12,11,9,10,9,11,6,7,8
-3,Cincinnati Kid,5,8,9,8,9,11,6.5,10,11,10
-4,Kitty Kats,6,11,5,6,3,12,6.5,12,4,9
-5,Cloud 9,8,6,8,11,7,4,10,4,5,1
-6,High Yellers,7,5,4,12,6,6,3,9,3,7
-7,Schmita Kuff,10,4,7,4,11,5,8.5,5,2,3
-8,Ding-a- lingers,9,10,10,7,5,3,5,7,1,2
-9,Al's Disciple,4,3,6,5,4,7,4,8,8,5
-10,The Donaters,3,7,3,3,2,8,12,1,9,4
-11,Triple Trouble,1,1,1,1,12,1,1,2,12,11
-12,Jeter's Gems,2,2,2,2,1,2,2,3,6,6
+RK,Team,R,HR,RBI,SB,AVG,K,W,ERA,WHIP,SVHD
+1,Al - Stars,11,9,12,10,8,10,8.5,10,12,11
+2,Teeter Twatters,12,12,11,9,10,9,11,7,8,6
+3,Cincinnati Kid,5,8,9,8,9,11,6.5,11,10,10
+4,Kitty Kats,6,11,5,6,3,12,6.5,4,9,12
+5,Cloud 9,8,6,8,11,7,4,10,5,1,4
+6,High Yellers,7,5,4,12,6,6,3,3,7,9
+7,Schmita Kuff,10,4,7,4,11,5,8.5,2,3,5
+8,Ding-a- lingers,9,10,10,7,5,3,5,1,2,7
+9,Al's Disciple,4,3,6,5,4,7,4,8,5,8
+10,The Donaters,3,7,3,3,2,8,12,9,4,1
+11,Triple Trouble,1,1,1,1,12,1,1,12,11,2
+12,Jeter's Gems,2,2,2,2,1,2,2,6,6,3

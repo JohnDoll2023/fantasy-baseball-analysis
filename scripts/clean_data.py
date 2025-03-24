@@ -37,6 +37,11 @@ for file in files:
     # Set the column names
     roti_table.columns = column_headers
 
+    # move the columns so that it goes R,HR,RBI,SB,AVG,K,W,ERA,WHIP,SVHD for each data frame
+    roti_table = roti_table[['RK','Team', 'R', 'HR', 'RBI', 'SB', 'AVG', 'K', 'W', 'ERA', 'WHIP', 'SVHD']]
+
+
+
     # save rotisserie standings to csv
     roti_table.to_csv(f'./clean_data/roti/{file.split(' ')[-1]}', index=False)
 
@@ -55,6 +60,9 @@ for file in files:
     if '2015' in file:
         #remove the last 2 rows for data inconsistences
         numerical_table = numerical_table[:-2]
+
+    # move the columns so that it goes R,HR,RBI,SB,AVG,K,W,ERA,WHIP,SVHD for each data frame
+    numerical_table = numerical_table[['RK','Team', 'R', 'HR', 'RBI', 'SB', 'AVG', 'K', 'W', 'ERA', 'WHIP', 'SVHD']]
 
     # save numerical standings to csv
     numerical_table.to_csv(f'./clean_data/stats/{file.split(' ')[-1]}', index=False)
